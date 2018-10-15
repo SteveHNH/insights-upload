@@ -171,7 +171,7 @@ def produce_queue_mocked():
 
 @pytest.fixture
 def broker_stage_messages(s3_mocked, produce_queue_mocked):
-    def set_url(_file, service, avoid_produce_queue=False, validation='success'):
+    def set_url(_file, service, avoid_produce_queue=False, validation='success', validating_service='testareno'):
         file_name = uuid.uuid4().hex
 
         file_path, _ = s3_storage.write(

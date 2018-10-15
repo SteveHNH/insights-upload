@@ -61,12 +61,13 @@ services will not utilize that.
 
 Services should return a message with the UID and the validation message to the `uploadvalidation` topic:
 
-    {'hash': 'abcdef123456', 'validation': 'success'} # or 'validation': 'failure'
+    {'hash': 'abcdef123456', 'validation': 'success', 'validating_service': 'testareno'} # or 'validation': 'failure'
     
 Fields:
 
   - hash: Unique ID being addresed by validation message
-  - validation: Either succes or failure based on whether the payload passed validation or not
+  - validation: Either `success` or `failure` based on whether the payload passed validation or not
+  - validating_service: Respond with the name of ther service that did the validation. ex: advisor
 
 ### Current Active Topics
 

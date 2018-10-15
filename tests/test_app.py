@@ -186,8 +186,8 @@ class TestProducerAndConsumer:
 
     @staticmethod
     def _create_message_s3(_file, _stage_message, avoid_produce_queue=False, validation='success',
-                           topic='uploadvalidation'):
-        return _stage_message(_file, topic, avoid_produce_queue, validation)
+                           topic='uploadvalidation', validating_service='testareno'):
+        return _stage_message(_file, topic, avoid_produce_queue, validation, validating_service)
 
     @asyncio.coroutine
     async def coroutine_test(self, method, exc_message='Stopping the iteration'):
@@ -259,7 +259,7 @@ class TestProducerAndConsumer:
         with FakeMQ():
             for _ in range(total_messages):
                 message = self._create_message_s3(
-                    local_file, broker_stage_messages, avoid_produce_queue=True, topic=topic, validation='failure'
+                    local_file, broker_stage_messages, avoid_produce_queue=True, topic=topic, validation='failure', validating_service='testareno'
                 )
                 app.mqc.send_and_wait(topic, json.dumps(message).encode('utf-8'), True)
                 produced_messages.append(message)
@@ -296,7 +296,7 @@ class TestProducerAndConsumer:
         with FakeMQ():
             for _ in range(total_messages):
                 message = self._create_message_s3(
-                    local_file, broker_stage_messages, avoid_produce_queue=True, topic=topic, validation='unknown'
+                    local_file, broker_stage_messages, avoid_produce_queue=True, topic=topic, validation='unknown', validating_service='testareno'
                 )
                 app.mqc.send_and_wait(topic, json.dumps(message).encode('utf-8'), True)
                 produced_messages.append(message)

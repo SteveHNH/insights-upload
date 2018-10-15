@@ -188,6 +188,7 @@ async def handle_file(msgs):
 
         hash_ = data['hash']
         result = data['validation']
+        service = data.get('service')
 
         logger.info('processing message: %s - %s', hash_, result)
         if result.lower() == 'success':
@@ -198,7 +199,8 @@ async def handle_file(msgs):
             produce_queue.append(
                 {
                     'topic': 'available',
-                    'msg': {'url': url}
+                    'msg': {'url': url,
+                            'validating_service': service}
                 }
             )
         elif result.lower() == 'failure':

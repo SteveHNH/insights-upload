@@ -56,7 +56,8 @@ while True:
 
     validation = {
         'hash': result['hash'],
-        'validation': 'failure'
+        'validation': 'failure',
+        'validating_service': 'testareno'
     }
 
     sleep(10)  # Mock file verification and validation
